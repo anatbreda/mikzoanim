@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" fill="#2a9d8f"/>
+  <!-- מפתח ברגים בתוך זכוכית מגדלת: חיפוש של בעל מקצוע -->
+  <g transform="rotate(-40 240 232)">
+    <rect x="226" y="222" width="30" height="96" rx="15" fill="#ffffff"/>
+    <circle cx="241" cy="200" r="38" fill="none" stroke="#ffffff" stroke-width="26"/>
+    <rect x="219" y="150" width="44" height="32" fill="#2a9d8f"/>
+  </g>
+  <circle cx="240" cy="232" r="132" fill="none" stroke="#ffffff" stroke-width="32"/>
+  <line x1="336" y1="328" x2="430" y2="422" stroke="#ffffff" stroke-width="44" stroke-linecap="round"/>
+</svg>

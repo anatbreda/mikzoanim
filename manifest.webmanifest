@@ -1,0 +1,21 @@
+{
+  "name": "מדריך בעלי מקצוע",
+  "short_name": "בעלי מקצוע",
+  "description": "חיפוש בעלי מקצוע לפי תחום ולפי שם, מתוך ייצוא של קבוצת ווטסאפ. הכל נשאר במכשיר.",
+  "lang": "he",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#faf7f2",
+  "theme_color": "#2a9d8f",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
