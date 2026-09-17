@@ -128,6 +128,12 @@ node tools/extract-cli.js <ייצוא.zip> --evidence
 ### בדיקות
 
 ```bash
-node tools/selftest.js       # 46 בדיקות למנוע
-node tools/api-selftest.mjs  # 31 בדיקות לשכבת השרת
+node tools/selftest.js        # 46 בדיקות למנוע
+node tools/api-selftest.mjs   # 31 בדיקות לאסימונים ולרשימת ההיתר
+node tools/flow-selftest.mjs  # 31 בדיקות למסלול המלא ולהרשאות
 ```
+
+`flow-selftest.mjs` מריץ את **מטפלי הבקשות האמיתיים** מול אחסון בזיכרון:
+הוא מעתיק את `api/*.mjs` לתיקייה זמנית ומחליף שם רק את `_store.mjs`. כך
+נבדק הקוד שרץ בפועל, בלי רשת ובלי דגלים ניסיוניים. הוא מכסה בין השאר את
+הכשל המסוכן ביותר — חבר קבוצה שמנסה לפרסם עם אסימון הצפייה שלו.
