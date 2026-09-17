@@ -182,6 +182,20 @@ check('לכל שיוך יש ראיה',
     });
   }), true);
 
+/* ------------- ייצוא בלי קבצי הכרטיסים ------------- */
+
+console.log('\nצ׳אט בלי קבצי vcf');
+
+// המקרה הסביר: הועלה רק קובץ הטקסט ולא ה-ZIP המלא. ההודעות קיימות,
+// הכרטיסים לא, ולכן אין מספרי טלפון — אבל השם והתחום עדיין נחלצים.
+var textOnly = PFPipeline.fromEntries([entry('WhatsApp Chat with שכונה.txt', chat)]);
+check('אזהרה על כרטיסים חסרים', (textOnly.warnings[0] || {}).type, 'missingCards');
+check('הספירה בשורת האזהרה', (textOnly.warnings[0] || {}).count, 5);
+check('כל הרשומות מסומנות בלי טלפון',
+  textOnly.people.every(function (p) { return p.phoneMissing; }), true);
+check('הסיווג עדיין עובד בלי הכרטיסים',
+  personNamed(textOnly, 'מירי לוי').categoryId, 'dental');
+
 /* ------------------------- סיכום ------------------------- */
 
 console.log('\n' + (failures ? '✗ ' + failures + ' מתוך ' + checks + ' בדיקות נכשלו'

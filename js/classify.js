@@ -273,8 +273,10 @@
     });
 
     if (missingFiles) {
-      // קורה כשהייצוא נעשה בלי "צירוף מדיה": ההודעות קיימות, הכרטיסים לא.
-      warnings.push({ type: 'nomedia', count: missingFiles });
+      // הודעת הכרטיס קיימת בצ'אט אבל קובץ ה-vcf לא הגיע. כרטיסי אנשי קשר
+      // נכללים בייצוא גם כשהוא נעשה בלי מדיה, ולכן הסיבה הסבירה היא
+      // שהועלה רק קובץ הטקסט במקום ה-ZIP המלא.
+      warnings.push({ type: 'missingCards', count: missingFiles });
     }
 
     return { assignment: assignment, warnings: warnings };
