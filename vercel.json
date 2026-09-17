@@ -1,0 +1,21 @@
+{
+  "rewrites": [
+    { "source": "/owner", "destination": "/group/owner.html" },
+    { "source": "/a/:token", "destination": "/group/admin.html" },
+    { "source": "/g/:token", "destination": "/group/view.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(a|g)/(.*)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/owner",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/group/(.*)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    }
+  ]
+}

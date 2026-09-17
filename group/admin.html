@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#2a9d8f">
+  <title>ניהול המדריך של הקבוצה</title>
+  <link rel="stylesheet" href="/css/styles.css?v=202609170630">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <style>
+    /* פס הפרסום יושב בתחתית ולא נאבק בסרגל הדביק שלמעלה */
+    body { padding-bottom: 132px; }
+    #publish-bar {
+      position: fixed;
+      inset-inline: 0;
+      bottom: 0;
+      z-index: 20;
+      background: var(--card);
+      border-top: 1px solid var(--line);
+      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+    }
+    #publish-bar .stack > * + * { margin-top: 8px; }
+    #publish-bar textarea { font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="publish-bar"></div>
+
+  <script src="/js/util.js?v=202609170630"></script>
+  <script src="/js/professions.js?v=202609170630"></script>
+  <script src="/js/vcard.js?v=202609170630"></script>
+  <script src="/js/zip.js?v=202609170630"></script>
+  <script src="/js/whatsapp.js?v=202609170630"></script>
+  <script src="/js/classify.js?v=202609170630"></script>
+  <script src="/js/pipeline.js?v=202609170630"></script>
+  <script src="/js/store.js?v=202609170630"></script>
+  <script src="/js/app.js?v=202609170630"></script>
+  <script src="/group/admin.js?v=202609170630"></script>
+</body>
+</html>

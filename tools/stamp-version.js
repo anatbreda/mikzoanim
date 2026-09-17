@@ -14,23 +14,31 @@
 var fs = require('fs');
 var path = require('path');
 
-var file = path.join(__dirname, '..', 'index.html');
-var html = fs.readFileSync(file, 'utf8');
+var files = [path.join(__dirname, '..', 'index.html')]
+  .concat(fs.existsSync(path.join(__dirname, '..', 'group'))
+    ? fs.readdirSync(path.join(__dirname, '..', 'group'))
+      .filter(function (f) { return /\.html$/.test(f); })
+      .map(function (f) { return path.join(__dirname, '..', 'group', f); })
+    : []);
 
 var d = new Date();
 function pad(n) { return (n < 10 ? '0' : '') + n; }
 var stamp = d.getUTCFullYear() + pad(d.getUTCMonth() + 1) + pad(d.getUTCDate()) +
   pad(d.getUTCHours()) + pad(d.getUTCMinutes());
 
-var before = html;
-html = html.replace(/(href="css\/[^"?]+\.css)(\?v=[^"]*)?"/g, '$1?v=' + stamp + '"');
-html = html.replace(/(src="js\/[^"?]+\.js)(\?v=[^"]*)?"/g, '$1?v=' + stamp + '"');
+var total = 0;
+files.forEach(function (file) {
+  var html = fs.readFileSync(file, 'utf8');
+  // גם נתיב יחסי (index.html) וגם מוחלט (דפי group/, שמוגשים מכתובת אחרת)
+  html = html.replace(/((?:href|src)="\/?(?:css|js|group)\/[^"?]+\.(?:css|js))(\?v=[^"]*)?"/g,
+    '$1?v=' + stamp + '"');
+  fs.writeFileSync(file, html);
+  total += (html.match(new RegExp('\\?v=' + stamp, 'g')) || []).length;
+});
 
-if (html === before) {
-  console.error('לא נמצאו קבצי css/js לחתימה ב-index.html');
+if (!total) {
+  console.error('לא נמצאו קבצי css/js לחתימה');
   process.exit(1);
 }
 
-fs.writeFileSync(file, html);
-var count = (html.match(new RegExp('\\?v=' + stamp, 'g')) || []).length;
-console.log('נחתמו ' + count + ' קבצים בגרסה ' + stamp);
+console.log('נחתמו ' + total + ' קבצים בגרסה ' + stamp + ' (' + files.length + ' דפים)');
