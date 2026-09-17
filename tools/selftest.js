@@ -196,6 +196,21 @@ check('כל הרשומות מסומנות בלי טלפון',
 check('הסיווג עדיין עובד בלי הכרטיסים',
   personNamed(textOnly, 'מירי לוי').categoryId, 'dental');
 
+/* ------------- חותם גרסה על הנכסים ------------- */
+
+console.log('\nחותם גרסה');
+
+// בלי חותם, דפדפן שכבר ביקר באתר ממשיך להריץ את הגרסה הישנה אחרי פרסום.
+var indexHtml = require('fs').readFileSync(__dirname + '/../index.html', 'utf8');
+var assets = indexHtml.match(/(?:href="css\/[^"]+|src="js\/[^"]+)/g) || [];
+check('נמצאו נכסים מקומיים ב-index.html', assets.length > 0, true);
+check('לכל נכס מקומי יש חותם גרסה',
+  assets.filter(function (a) { return a.indexOf('?v=') === -1; }), []);
+check('כל הנכסים חולקים אותו חותם',
+  (indexHtml.match(/\?v=(\d+)/g) || []).filter(function (v, i, all) {
+    return v !== all[0];
+  }), []);
+
 /* ------------------------- סיכום ------------------------- */
 
 console.log('\n' + (failures ? '✗ ' + failures + ' מתוך ' + checks + ' בדיקות נכשלו'
